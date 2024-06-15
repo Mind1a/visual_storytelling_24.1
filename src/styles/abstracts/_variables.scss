@@ -1,6 +1,11 @@
 //Background
 $bg-primary: #bad8fc;
 
+$app-bg-colors: (
+  landing: $bg-primary,
+  default: #f5f5f5,
+);
+
 //Text color
 $text-color-primary: #111010;
 $text-color-secondary: #583933;
