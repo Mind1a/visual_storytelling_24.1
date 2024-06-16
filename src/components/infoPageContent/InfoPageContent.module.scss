@@ -1,0 +1,66 @@
+@import "./../../styles/abstracts/mixins";
+@import "./../../styles/abstracts/variables";
+
+.contentWrapper {
+  display: flex;
+  height: 100%;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  position: relative;
+  padding: 16px;
+
+  h1 {
+    font-family: "BPG Nino Mtavruli", sans-serif;
+    font-size: $heading-size-md;
+    color: $text-color-secondary;
+    z-index: 10;
+  }
+  p {
+    font-family: "BPG Nino Mkhedruli", sans-serif;
+    font-size: $font-size-lg;
+    text-align: justify;
+    letter-spacing: 0.01em;
+    max-width: 1000px;
+    padding-block: 38.5px;
+    color: $text-color-primary;
+    z-index: 10;
+  }
+
+  @media (min-width: 768px) {
+    justify-content: flex-start;
+    gap: 64px;
+    padding-top: 142px;
+  }
+}
+
+.bgPattern {
+  position: absolute;
+  z-index: 1;
+  opacity: 0.5;
+
+  &.topLeft {
+    left: 49px;
+    top: 0;
+  }
+
+  &.topRight {
+    right: 72.59px;
+    top: 20px;
+  }
+
+  &.bottomLeft {
+    left: 0;
+    bottom: 0;
+  }
+
+  &.bottomRight {
+    right: 0;
+    bottom: 0;
+  }
+
+  @media (min-width: 1024px) {
+    opacity: 1;
+  }
+}
