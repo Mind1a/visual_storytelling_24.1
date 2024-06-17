@@ -7,16 +7,18 @@
   width: 100%;
   max-width: 1366px;
   height: 108px;
-  padding: 0 81px 0 99px;
+  padding: 0 5.93% 0 7.25%;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 90.99px;
+  flex-wrap: nowrap;
+  gap: 6.66vw;
   background-color: $bg-primary;
   font-family: "DejaVu Sans", sans-serif;
 
   .logo img {
     width: 100px;
     height: 62px;
+    flex-shrink: 1;
   }
 }
