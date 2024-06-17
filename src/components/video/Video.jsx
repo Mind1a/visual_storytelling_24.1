@@ -10,6 +10,7 @@ import {
 } from "react-icons/fa6";
 import { GoScreenFull } from "react-icons/go";
 import PlayIcon from "../../assets/images/play-icon.png";
+import styles from "./Video.module.scss";
 
 const Video = () => {
   const videoRef = useRef(null);
@@ -90,11 +91,11 @@ const Video = () => {
 
   return (
     <div
-      className="video-wrapper"
+      className={styles["video-wrapper"]}
       onDoubleClick={toggleFullScreen}
       ref={wrapperRef}>
       <video
-        className="video-player"
+        className={styles["video-player"]}
         loop
         muted
         ref={videoRef}
@@ -108,7 +109,7 @@ const Video = () => {
       </video>
       {!hasPlayed ? (
         <div
-          className="starter-overlay"
+          className={styles["starter-overlay"]}
           onClick={() => {
             handlePlayPause();
             setHasPlayed(true);
@@ -122,44 +123,45 @@ const Video = () => {
       <div
         className={
           videoRef.current?.paused && hasPlayed
-            ? "video-overlay-paused"
-            : "video-overlay"
+            ? styles["video-overlay-paused"]
+            : styles["video-overlay"]
         }
         onClick={handlePlayPause}>
         <div
-          className="controls"
+          className={styles.controls}
           onClick={e => e.stopPropagation()}>
-          <div className="col1">
+          <div className={styles.col1}>
             <button
-              className="play-btn"
+              className={styles["play-btn"]}
               onClick={handlePlayPause}>
               {isPlaying ? <FaPause /> : <FaPlay />}
             </button>
           </div>
-          <div className="col2">
-            <div className="inputs">
-              <div className="volume-wrapper">
+          <div className={styles.col2}>
+            <div className={styles.inputs}>
+              <div className={styles["volume-wrapper"]}>
                 {volume > 0.6 ? (
                   <FaVolumeHigh
-                    className="volume-icon"
+                    className={styles["volume-icon"]}
                     onClick={toggleMute}
                   />
                 ) : null}
                 {volume < 0.6 && volume > 0 ? (
                   <FaVolumeLow
-                    className="volume-icon"
+                    className={styles["volume-icon"]}
                     onClick={toggleMute}
                   />
                 ) : null}
                 {volume === 0 ? (
                   <FaVolumeXmark
-                    className="volume-icon"
+                    className={styles["volume-icon"]}
                     onClick={toggleMute}
                   />
                 ) : null}
 
                 <input
                   id="volume"
+                  className={styles.volume}
                   type="range"
                   min="0"
                   max="1"
@@ -170,6 +172,7 @@ const Video = () => {
               </div>
               <input
                 id="video-range"
+                className={styles["video-range"]}
                 type="range"
                 min="0"
                 max={duration}
@@ -178,21 +181,28 @@ const Video = () => {
                 onChange={handleSeek}
               />
             </div>
-            <div className="time">
+            <div className={styles.time}>
               <span id="current">
                 {Math.floor(currentTime / 60)}:
                 {("0" + Math.floor(currentTime % 60)).slice(-2)}
               </span>
-              <span id="divider">/</span>
+              <span
+                id="divider"
+                className={styles.divider}>
+                /
+              </span>
               <span id="total">
                 {Math.floor(duration / 60)}:
                 {("0" + Math.floor(duration % 60)).slice(-2)}
               </span>
             </div>
             <div
-              className="fullscreen"
+              className={styles.fullscreen}
               onClick={toggleFullScreen}>
-              <GoScreenFull id="fs-icon" />
+              <GoScreenFull
+                id="fs-icon"
+                styles={styles["fs-icon"]}
+              />
             </div>
           </div>
         </div>

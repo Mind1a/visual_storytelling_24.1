@@ -6,7 +6,7 @@
   margin-bottom: 46px;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.5);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
   transition: all 0.2s ease-in-out;
 
   @media (max-width: 850px) {
@@ -33,7 +33,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    transition: all 0.3s ease-in-out;
     z-index: 1;
     display: flex;
     justify-content: center;
@@ -144,7 +143,7 @@
             }
           }
 
-          #video-range {
+          .video-range {
             position: absolute;
             left: 0;
             top: -10px;
@@ -168,7 +167,7 @@
               translate: 80px;
             }
 
-            #volume {
+            .volume {
               width: 90%;
               opacity: 0;
 
@@ -190,7 +189,7 @@
                 transition: all 0.2s ease-in-out;
                 translate: 0;
               }
-              #volume {
+              .volume {
                 transition: all 0.2s ease-in-out;
                 opacity: 1;
               }
@@ -208,7 +207,7 @@
             margin-right: 10px;
           }
 
-          #divider {
+          .divider {
             margin: 0 5px;
           }
         }
@@ -216,13 +215,13 @@
         .fullscreen {
           cursor: pointer;
 
-          #fs-icon {
+          .fs-icon {
             font-size: 1.5rem;
             color: #d3d3d3;
           }
 
           &:hover {
-            #fs-icon {
+            .fs-icon {
               color: #fff;
               transition: all 0.2s ease-in-out;
             }
