@@ -1,5 +1,5 @@
 import styles from "./Card.module.scss";
-import dlIcon from "../../assets/images/dl-icon.png";
+import dlIcon from "../../../assets/images/dl-icon.png";
 
 const Card = ({ item }) => {
   return (
