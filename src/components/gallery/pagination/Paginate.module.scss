@@ -14,7 +14,8 @@
     .lastPage,
     .prev,
     .next,
-    .ellipsis {
+    .ellipsis,
+    .active {
       width: 35px;
       height: 35px;
       font-size: 16px;
@@ -35,14 +36,38 @@
     .next,
     .ellipsis,
     .lastPage,
-    .firstPage {
+    .firstPage,
+    .active {
       margin-left: 12px;
     }
 
     .ellipsis {
       cursor: default;
+
+      span {
+        font-size: 24px;
+        position: relative;
+        bottom: 5px;
+      }
+
       &:hover {
         background-color: transparent;
+      }
+    }
+
+    .active {
+      background-color: #e3e3e3;
+      cursor: default;
+    }
+
+    .prev,
+    .next {
+      &:disabled {
+        cursor: default;
+
+        &:hover {
+          background-color: transparent;
+        }
       }
     }
 
@@ -52,10 +77,6 @@
       .pagesToNavigate {
         display: flex;
       }
-    }
-
-    .active {
-      background-color: #e3e3e3;
     }
   }
 }

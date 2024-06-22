@@ -1,28 +1,77 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect } from "react";
 import styles from "./Paginate.module.scss";
 import rightArrowIcon from "../../../assets/images/right-arrow-icon.png";
 import leftArrowIcon from "../../../assets/images/left-arrow-icon.png";
 import { GalleryContext } from "../../../context/features/galleryContext";
+import { useNavigate, useSearchParams } from "react-router-dom";
 
 const Paginate = () => {
-  const { pages, pageCount, handlePageClick } = useContext(GalleryContext);
+  const {
+    pages,
+    setQPage,
+    pageCount,
+    handlePageClick,
+    handleRightArrowClick,
+    handleLeftArrowClick,
+    currentPage,
+    resetGallery,
+  } = useContext(GalleryContext);
+
+  const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const qPage = searchParams.get("page");
+
+  useEffect(() => {
+    if (qPage) {
+      setQPage(+qPage);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!qPage) {
+      resetGallery();
+    }
+  }, []);
+
+  const handlePageUrl = page => {
+    if (page) {
+      navigate({
+        pathname: "/gallery",
+        search: `?page=${page}`,
+      });
+    }
+  };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>
-        <div className={styles.prev}>
+        <button
+          className={styles.prev}
+          onClick={() => {
+            handleLeftArrowClick(currentPage - 1);
+            if (currentPage - 1 === 1) {
+              navigate("/gallery");
+            } else {
+              handlePageUrl(currentPage - 1);
+            }
+          }}
+          disabled={currentPage === 1}>
           <img
             src={leftArrowIcon}
             alt="sd"
           />
-        </div>
+        </button>
         <div className={styles.pages}>
           <div
-            className={styles.firstPage}
-            onClick={() => handlePageClick(0)}>
+            className={currentPage === 1 ? styles.active : styles.firstPage}
+            onClick={() => {
+              handlePageClick(1);
+              handlePageUrl(1);
+              navigate("/gallery");
+            }}>
             <span>1</span>
           </div>
-          {pages[1] > 3 ? (
+          {pages[0] >= 3 ? (
             <div className={styles.ellipsis}>
               <span>...</span>
             </div>
@@ -31,29 +80,47 @@ const Paginate = () => {
             {pages.map(page => (
               <div
                 key={page}
-                className={styles.page}
-                onClick={() => handlePageClick(page)}>
+                className={
+                  currentPage === page || qPage === page
+                    ? styles.active
+                    : styles.page
+                }
+                onClick={() => {
+                  handlePageClick(page);
+                  handlePageUrl(page);
+                }}>
                 {page}
               </div>
             ))}
           </div>
-          {pages[1] !== pageCount - 1 ? (
+          {pages[2] !== pageCount - 1 ? (
             <div className={styles.ellipsis}>
               <span>...</span>
             </div>
           ) : null}
           <div
-            className={styles.lastPage}
-            onClick={() => handlePageClick(pageCount)}>
+            className={
+              currentPage === pageCount ? styles.active : styles.lastPage
+            }
+            onClick={() => {
+              handlePageClick(pageCount);
+              handlePageUrl(pageCount);
+            }}>
             <span>{pageCount}</span>
           </div>
         </div>
-        <div className={styles.next}>
+        <button
+          className={styles.next}
+          onClick={() => {
+            handleRightArrowClick(currentPage + 1);
+            handlePageUrl(currentPage + 1);
+          }}
+          disabled={currentPage === pageCount}>
           <img
             src={rightArrowIcon}
             alt="sd"
           />
-        </div>
+        </button>
       </div>
     </div>
   );
