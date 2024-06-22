@@ -1,0 +1,43 @@
+@import "./../../styles/abstracts/mixins";
+@import "./../../styles/abstracts/variables";
+
+.landing-container {
+  width: 100%;
+  height: 100%;
+  background-color: $bg-primary;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  .title {
+    font-family: "FiraGO Regular", sans-serif;
+    letter-spacing: calc($heading-size-lg * 0.14);
+    font-weight: 400;
+    font-size: $heading-size-lg;
+    color: $text-color-secondary;
+    text-align: center;
+
+    @media (max-width: 550px) {
+      font-size: $heading-size-md;
+    }
+  }
+
+  .landing-btn {
+    font-family: "BPG Nino Mtavruli", sans-serif;
+    @include button(
+      $btn-bg-accent,
+      #ffffff,
+      $btn-bg-accent-hover,
+      $btn-bg-accent
+    );
+    width: 185px;
+    height: 50px;
+    line-height: 50px;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    font-size: $font-size-md;
+    border-radius: 10px;
+  }
+}

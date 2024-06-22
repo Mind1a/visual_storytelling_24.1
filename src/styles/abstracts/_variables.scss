@@ -1,6 +1,11 @@
 //Background
 $bg-primary: #bad8fc;
 
+$app-bg-colors: (
+  landing: $bg-primary,
+  default: #f5f5f5,
+);
+
 //Text color
 $text-color-primary: #111010;
 $text-color-secondary: #583933;
@@ -24,3 +29,15 @@ $dropdown-bg-color: #55ff7a;
 
 //Card
 $card-active-bg: #fff6d0;
+
+// General font sizes
+$font-size-xl: 1.5rem; // 24px
+$font-size-lg: 1.125rem; // 18px
+$font-size-md: 1rem; // 16px
+$font-size-sm: 0.875rem; // 14px
+$font-size-xs: 0.625rem; // 10px
+
+// Heading font sizes
+$heading-size-lg: 3rem; // 48px
+$heading-size-md: 2rem; // 32px
+$heading-size-sm: 1.25rem; // 20px
