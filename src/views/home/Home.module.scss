@@ -1,0 +1,42 @@
+@import "../../styles/abstracts/variables";
+@import "../../styles/abstracts/mixins";
+
+.container {
+  @include flex-center(column);
+  gap: 2.6rem;
+  height: 100%;
+  padding: 2.6rem 0;
+
+  @supports not (gap: 2.6rem) {
+    & > *:not(:last-child) {
+      margin-bottom: 2.6rem;
+    }
+  }
+
+  .buttonWrapper {
+    @include flex-center(row);
+    flex-wrap: wrap;
+    gap: 1.5rem;
+
+    @supports not (gap: 1.5rem) {
+      & > *:not(:last-child) {
+        margin-right: 1.5rem;
+      }
+    }
+  }
+
+  .categoryWrapper {
+    @include flex-center(row);
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    background-color: $bg-primary;
+    padding: 2.75rem 1rem 3.6rem 1rem;
+    width: 100%;
+
+    @supports not (gap: 1.5rem) {
+      & > *:not(:last-child) {
+        margin-right: 1.5rem;
+      }
+    }
+  }
+}
