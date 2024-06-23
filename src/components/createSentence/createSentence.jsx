@@ -1,7 +1,8 @@
-import React from "react";
-
-const createSentence = () => {
-  return <div>createSentence</div>;
+export const CreateSentence = ({ words, category }) => {
+  return (
+    <div>
+      <p>{words} სიტყვიანი წინადადება</p>
+      <p>კატეგორია: {category}</p>
+    </div>
+  );
 };
-
-export default createSentence;
