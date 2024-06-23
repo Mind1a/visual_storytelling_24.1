@@ -1,0 +1,29 @@
+@import "../../../styles/abstracts/variables";
+@import "../../../styles/abstracts/mixins";
+
+.container {
+  @include flex-center(column);
+  gap: 6px;
+
+  @supports not (gap: 6px) {
+    & > *:not(:last-child) {
+      margin-bottom: 6px;
+    }
+  }
+}
+
+.sentenceButton.words3 {
+  @include sentence-button($btn-bg-accent);
+}
+
+.sentenceButton.words4 {
+  @include sentence-button($btn-bg-custom);
+}
+
+.sentenceButton.words3.active {
+  @include active-state($btn-border-accent-hover, $btn-bg-accent-hover);
+}
+
+.sentenceButton.words4.active {
+  @include active-state($btn-bg-custom, $btn-bg-custom-hover);
+}

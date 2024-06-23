@@ -1,7 +1,12 @@
-import React from "react";
+import styles from "./BasicButton.module.scss";
 
-const BasicButton = () => {
-  return <button>BasicButton</button>;
+export const BasicButton = ({ children, onClick, disabled }) => {
+  return (
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={styles.basicButton}>
+      {children}
+    </button>
+  );
 };
-
-export default BasicButton;
