@@ -1,3 +1,31 @@
+@mixin flex-center($direction) {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: $direction;
+}
+
+@mixin basic-button($bg-color, $text-color) {
+  background-color: $bg-color;
+  color: $text-color;
+  padding: 13px 30px;
+  border-radius: 10px;
+  font-family: "DejaVu Sans", sans-serif;
+  font-size: $font-size-md;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(10, 10, 10, 0.4);
+  }
+
+  &:disabled {
+    background-color: $btn-bg-disabled;
+    box-shadow: none;
+    cursor: default;
+  }
+}
+
 @mixin button($bg-color, $text-color, $hover-bg-color, $border-color) {
   background-color: $bg-color;
   color: $text-color;
@@ -8,6 +36,53 @@
 
   &:hover {
     background-color: $hover-bg-color;
+  }
+}
+
+@mixin sentence-button($bg-color) {
+  display: flex;
+  align-items: flex-end;
+  gap: 15px;
+  text-align: left;
+  padding: 11px 24px;
+  line-height: 1.3;
+  font-family: "BPG Nino Mtavruli", sans-serif;
+  font-size: $font-size-sm;
+  font-weight: 700;
+  background-color: $bg-color;
+  color: $text-color-primary;
+  border: 3px solid transparent;
+  border-radius: 10px;
+  white-space: normal;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  @supports not (gap: 15px) {
+    & > *:not(:last-child) {
+      margin-bottom: 15px;
+    }
+  }
+
+  &:hover {
+    box-shadow: 0 4px 12px rgba(10, 10, 10, 0.4);
+  }
+
+  & > span {
+    align-self: center;
+    font-family: "Inter", sans-serif;
+    font-size: $font-size-xxl;
+    font-weight: 600;
+    line-height: 1;
+  }
+}
+
+@mixin active-state($border-color, $bg-color) {
+  border-color: $border-color;
+  background-color: $bg-color;
+  cursor: default;
+
+  &:hover {
+    box-shadow: none;
   }
 }
 
