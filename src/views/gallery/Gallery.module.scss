@@ -8,7 +8,9 @@
 
     .filter {
       width: 190px;
-      background-color: antiquewhite;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
     }
 
     .gallery {

@@ -3,16 +3,31 @@ import { Card } from "../../components/gallery/card";
 import { Paginate } from "../../components/gallery/pagination";
 import { useContext } from "react";
 import { GalleryContext } from "../../context/features/galleryContext";
+import { Filters } from "../../components/gallery/filters";
+import { useSearchParams } from "react-router-dom";
 
 const Gallery = () => {
   const { currentItems } = useContext(GalleryContext);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const addQueryParams = (key, value) => {
+    let newParams = new URLSearchParams(searchParams);
+    newParams.set(key, value);
+    setSearchParams(newParams);
+  };
+
+  const removeQueryParam = key => {
+    let newParams = new URLSearchParams(searchParams);
+    newParams.delete(key);
+    setSearchParams(newParams.toString());
+  };
 
   return (
     <div className={styles.container}>
       <div className={styles.galleryWrapper}>
         <div className={styles.filter}>
-          {" "}
-          <h1>here goes filters</h1>
+          <Filters removeQueryParam={removeQueryParam} />
         </div>
         <div className={styles.gallery}>
           {currentItems.map(item => (
@@ -23,7 +38,7 @@ const Gallery = () => {
           ))}
         </div>
       </div>
-      <Paginate />
+      <Paginate addQueryParams={addQueryParams} />
     </div>
   );
 };
