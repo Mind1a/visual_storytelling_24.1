@@ -7,7 +7,7 @@ import { Filters } from "../../components/gallery/filters";
 import { useSearchParams } from "react-router-dom";
 
 const Gallery = () => {
-  const { currentItems } = useContext(GalleryContext);
+  const { currentItems, isSearching } = useContext(GalleryContext);
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -17,19 +17,18 @@ const Gallery = () => {
     setSearchParams(newParams);
   };
 
-  const removeQueryParam = key => {
-    let newParams = new URLSearchParams(searchParams);
-    newParams.delete(key);
-    setSearchParams(newParams.toString());
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.galleryWrapper}>
         <div className={styles.filter}>
-          <Filters removeQueryParam={removeQueryParam} />
+          <Filters addQueryParams={addQueryParams} />
         </div>
         <div className={styles.gallery}>
+          <div className={styles.errorMsg}>
+            {isSearching && currentItems.length === 0 ? (
+              <p>არაფერი მოიძებნა!</p>
+            ) : null}
+          </div>
           {currentItems.map(item => (
             <Card
               key={item.id}
@@ -38,7 +37,7 @@ const Gallery = () => {
           ))}
         </div>
       </div>
-      <Paginate addQueryParams={addQueryParams} />
+      {!isSearching ? <Paginate addQueryParams={addQueryParams} /> : null}
     </div>
   );
 };

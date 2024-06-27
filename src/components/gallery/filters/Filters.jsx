@@ -1,16 +1,20 @@
 import styles from "./Filters.module.scss";
-import searchIcon from "../../../assets/images/search-icon.png";
 import { useContext, useEffect, useState } from "react";
 import { GalleryContext } from "../../../context/features/galleryContext";
 import { galleryData } from "../../../data";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { Search } from "./search";
 
-const Filters = ({ removeQueryParam }) => {
+const Filters = () => {
   const [filterTypes, setFilterTypes] = useState([]);
+  const [isFilterActive, setIsFilterActive] = useState(false);
 
-  const { setData, resetGallery } = useContext(GalleryContext);
+  const { setData, resetGallery, isSearching, setIsSearching } =
+    useContext(GalleryContext);
 
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const qType = searchParams.get("type");
 
   const handleCheckbox = e => {
     if (e.target.checked) {
@@ -22,50 +26,55 @@ const Filters = ({ removeQueryParam }) => {
   };
 
   const handleFilter = () => {
+    setIsFilterActive(true);
+
     if (filterTypes.length) {
       if (filterTypes.length > 1) {
         setData(galleryData);
-        resetGallery();
         navigate("/gallery");
       } else {
         const filteredData = galleryData.filter(
           item => item.type === filterTypes[0],
         );
         setData(filteredData);
-        resetGallery();
+
         navigate({
           pathname: "/gallery",
           search: `type=${filterTypes[0]}`,
         });
+
+        setIsSearching(false);
       }
+      resetGallery();
     } else {
       setData(galleryData);
-      removeQueryParam("type");
+      if (isFilterActive) {
+        navigate("/gallery");
+        resetGallery();
+      }
     }
   };
+
+  useEffect(() => {
+    if (qType) {
+      setFilterTypes([qType]);
+      setIsFilterActive(true);
+    }
+  }, [qType]);
 
   useEffect(() => {
     handleFilter();
   }, [filterTypes]);
 
+  useEffect(() => {
+    if (isSearching) {
+      setFilterTypes([]);
+    }
+  }, [isSearching]);
+
   return (
     <>
-      <form className={styles.searchForm}>
-        <div className={styles.searchBox}>
-          <img
-            src={searchIcon}
-            alt="search"
-            className={styles.searchIcon}
-          />
-          <input
-            type="search"
-            name="search"
-            id="search"
-            placeholder="ძიება..."
-            className={styles.searchInput}
-          />
-        </div>
-      </form>
+      <Search />
       <section className={styles.checkboxes}>
         <div className={styles.checkbox}>
           <input
@@ -74,6 +83,7 @@ const Filters = ({ removeQueryParam }) => {
             id="noun"
             value="noun"
             onChange={e => handleCheckbox(e)}
+            checked={filterTypes.includes("noun")}
           />
           <label htmlFor="noun">არსებითი სახელი</label>
         </div>
@@ -84,6 +94,7 @@ const Filters = ({ removeQueryParam }) => {
             id="verb"
             value="verb"
             onChange={e => handleCheckbox(e)}
+            checked={filterTypes.includes("verb")}
           />
           <label htmlFor="verb">ზმნა</label>
         </div>

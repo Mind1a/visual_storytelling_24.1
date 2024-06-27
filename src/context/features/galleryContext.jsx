@@ -7,6 +7,7 @@ const itemsPerPage = 8;
 const defaultPages = [2, 3, 4];
 
 const GalleryProvider = ({ children }) => {
+  const [isSearching, setIsSearching] = useState(false);
   const [data, setData] = useState(galleryData);
 
   const [itemOffset, setItemOffset] = useState(0);
@@ -26,18 +27,19 @@ const GalleryProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    if (qPage) {
+    if (qPage !== null && qPage !== undefined) {
       if (qPage === pageCount) {
-        setPages([pageCount - 3, pageCount - 2, pageCount - 1]);
+        setPages([qPage - 3, qPage - 2, qPage - 1]);
+      } else if (qPage === pageCount - 1) {
+        setPages([qPage - 2, qPage - 1, qPage]);
+      } else if (qPage === 1) {
+        setPages([qPage + 1, qPage + 2, qPage + 3]);
+      } else if (qPage === 2) {
+        setPages([qPage, qPage + 1, qPage + 2]);
       } else {
-        if (qPage === pageCount - 1) {
-          setPages([qPage - 2, qPage - 1, qPage]);
-        } else if (qPage === 2) {
-          setPages([qPage, qPage + 1, qPage + 2]);
-        } else {
-          setPages([qPage - 1, qPage, qPage + 1]);
-        }
+        setPages([qPage - 1, qPage, qPage + 1]);
       }
+
       setCurrentPage(qPage);
       setItemOffset(((qPage - 1) * itemsPerPage) % data.length);
     } else {
@@ -125,6 +127,8 @@ const GalleryProvider = ({ children }) => {
     currentPage,
     resetGallery,
     setData,
+    isSearching,
+    setIsSearching,
   };
 
   return (

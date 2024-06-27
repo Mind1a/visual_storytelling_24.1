@@ -20,21 +20,19 @@ const Paginate = ({ addQueryParams }) => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const qPage = searchParams.get("page");
+  const qType = searchParams.get("type");
 
   useEffect(() => {
     if (qPage) {
-      setQPage(+qPage);
+      setQPage(parseInt(qPage, 10));
     }
-  }, []);
-
-  useEffect(() => {
-    if (!qPage) {
+    if (!qPage && !qType) {
       resetGallery();
     }
-  }, []);
+  }, [qPage, qType, setQPage, resetGallery]);
 
   const handlePageUrl = page => {
-    if (page) {
+    if (page && !qType) {
       addQueryParams("page", page);
     }
   };
@@ -64,7 +62,6 @@ const Paginate = ({ addQueryParams }) => {
             onClick={() => {
               handlePageClick(1);
               handlePageUrl(1);
-              navigate("/gallery");
             }}>
             <span>1</span>
           </div>

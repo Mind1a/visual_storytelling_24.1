@@ -1,0 +1,31 @@
+@import "../../../../styles/abstracts/variables";
+
+.searchForm {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+
+  .searchBox {
+    width: 181px;
+    height: 44px;
+    border: 2px solid #a8a8a8;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .searchIcon {
+      padding-left: 10px;
+    }
+
+    .searchInput {
+      width: 145px;
+      height: 100%;
+      border: none;
+      outline: none;
+      background-color: transparent;
+      font-size: 14px;
+      padding-right: 2px;
+    }
+  }
+}
