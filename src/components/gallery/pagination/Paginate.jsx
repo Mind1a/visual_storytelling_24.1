@@ -5,7 +5,7 @@ import leftArrowIcon from "../../../assets/images/left-arrow-icon.png";
 import { GalleryContext } from "../../../context/features/galleryContext";
 import { useNavigate, useSearchParams } from "react-router-dom";
 
-const Paginate = () => {
+const Paginate = ({ addQueryParams }) => {
   const {
     pages,
     setQPage,
@@ -20,25 +20,20 @@ const Paginate = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const qPage = searchParams.get("page");
+  const qType = searchParams.get("type");
 
   useEffect(() => {
     if (qPage) {
-      setQPage(+qPage);
+      setQPage(parseInt(qPage, 10));
     }
-  }, []);
-
-  useEffect(() => {
-    if (!qPage) {
+    if (!qPage && !qType) {
       resetGallery();
     }
-  }, []);
+  }, [qPage, qType, setQPage, resetGallery]);
 
   const handlePageUrl = page => {
-    if (page) {
-      navigate({
-        pathname: "/gallery",
-        search: `?page=${page}`,
-      });
+    if (page && !qType) {
+      addQueryParams("page", page);
     }
   };
 
@@ -67,7 +62,6 @@ const Paginate = () => {
             onClick={() => {
               handlePageClick(1);
               handlePageUrl(1);
-              navigate("/gallery");
             }}>
             <span>1</span>
           </div>
