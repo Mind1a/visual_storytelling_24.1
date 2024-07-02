@@ -1,0 +1,8 @@
+@import "../../../styles/abstracts/mixins";
+@import "../../../styles/abstracts/variables";
+
+.basicButton {
+  @include basic-button($btn-bg-tertiary, $clr-black);
+  width: 11.25rem;
+  height: 3.125rem;
+}

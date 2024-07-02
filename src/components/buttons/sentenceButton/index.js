@@ -1,0 +1,1 @@
+export { SentenceButton } from "./SentenceButton";

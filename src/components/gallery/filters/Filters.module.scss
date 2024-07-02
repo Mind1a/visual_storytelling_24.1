@@ -1,0 +1,64 @@
+@import "../../../styles/abstracts/variables";
+
+.checkboxes {
+  margin-top: 15px;
+
+  .checkbox {
+    width: 181px;
+    height: 44px;
+    background-color: $btn-bg-primary;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    padding-left: 10px;
+    cursor: pointer;
+
+    &:nth-child(even) {
+      background-color: $btn-bg-accent;
+    }
+
+    &:last-child {
+      margin-top: 15px;
+    }
+
+    input[type="checkbox"] {
+      appearance: none;
+      display: flex;
+      align-content: center;
+      justify-content: center;
+      width: 18px;
+      height: 18px;
+      border: 1px solid black;
+      background-color: #ffffff;
+      border-radius: 5px;
+      display: grid;
+      place-content: center;
+    }
+
+    input[type="checkbox"]::before {
+      content: "";
+      width: 12px;
+      height: 12px;
+      transform: scale(0);
+      transition: 120ms transform ease-in-out;
+      box-shadow: inset 1em 1em var(--form-control-color);
+      transform-origin: bottom left;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+      background-color: #b5b5b5;
+    }
+
+    input[type="checkbox"]:checked::before {
+      transform: scale(1);
+    }
+
+    label {
+      margin-left: 5px;
+      font-size: 14px;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+    }
+  }
+}
