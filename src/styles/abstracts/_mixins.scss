@@ -97,3 +97,21 @@
 @mixin apply-bg($color) {
   background-color: $color;
 }
+
+@mixin list-element($bg-color, $icon) {
+  background-color: $bg-color;
+
+  &::before {
+    content: url($icon);
+    background-color: $bg-color;
+  }
+
+  &.active {
+    box-shadow: 27px 0px 0px 0px $bg-color;
+    transition: box-shadow 0.3s ease-in-out;
+
+    @media (max-width: 1250px) {
+      box-shadow: 0px 20px 0px 0px $bg-color;
+    }
+  }
+}

@@ -31,6 +31,14 @@
 }
 
 @font-face {
+  font-family: "FiraGO Medium";
+  src: url("/fonts/FiraGO-Medium.woff") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Inter";
   src: url("/fonts/Inter-VariableFont_slnt,wght.ttf") format("opentype");
   font-weight: normal;
