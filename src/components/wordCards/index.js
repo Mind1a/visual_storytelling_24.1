@@ -1,0 +1,1 @@
+export { WordCards } from "./WordCards";

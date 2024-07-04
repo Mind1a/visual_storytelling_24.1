@@ -1,0 +1,14 @@
+@import "./../../styles/abstracts/variables";
+@import "./../../styles/abstracts/mixins";
+
+.sentence {
+  color: $text-color-secondary;
+  font-size: $font-size-xl;
+  min-width: 365px;
+  max-width: 100%;
+  min-height: 3.3rem;
+  text-align: center;
+
+  border-bottom: 2px solid;
+  border-image: url("/images/svgs/dashes.svg") 10 round;
+}

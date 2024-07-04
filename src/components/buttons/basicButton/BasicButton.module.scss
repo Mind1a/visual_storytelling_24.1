@@ -1,8 +1,25 @@
 @import "../../../styles/abstracts/mixins";
 @import "../../../styles/abstracts/variables";
 
-.basicButton {
+.primary {
   @include basic-button($btn-bg-tertiary, $clr-black);
   width: 11.25rem;
   height: 3.125rem;
+}
+
+.secondary {
+  @include basic-button($btn-clr-secondary, $clr-white);
+  @include flex-center(row);
+  font-family: "BPG Nino Mtavruli", sans-serif;
+  font-weight: 500;
+  height: 3.125rem;
+  gap: 11px;
+  padding-top: 18px;
+  vertical-align: text-bottom;
+
+  @supports not (gap: 11px) {
+    & > *:not(:last-child) {
+      margin-right: 11px;
+    }
+  }
 }
