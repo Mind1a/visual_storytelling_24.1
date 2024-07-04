@@ -1,5 +1,7 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import useScreenshot from "../../hooks/useScreenshot";
+import { animationConfig } from "../../utils";
 
 import { categories } from "../../data/categories";
 import { SentenceButton } from "../../components/buttons/sentenceButton";
@@ -34,7 +36,8 @@ const Home = () => {
   };
 
   return (
-    <div
+    <motion.div
+      {...animationConfig}
       className={styles.container}
       ref={ref}>
       {!start ? (
@@ -78,7 +81,7 @@ const Home = () => {
           takeScreenshot={takeScreenshot}
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 

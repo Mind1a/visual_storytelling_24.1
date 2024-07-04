@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 import { useSentenceState } from "../../hooks/useSentenceState";
 import {
+  animationConfig,
   fourWordSentence,
   get5Steps,
   get7Steps,
@@ -13,6 +15,7 @@ import { DropBoxes } from "../dropBoxes";
 import { Sentence } from "../sentence";
 import { BasicButton } from "../buttons/basicButton/BasicButton";
 import { TakePhoto } from "../takePhoto";
+import { Loader } from "../loader";
 
 import styles from "./CreateSentence.module.scss";
 
@@ -52,7 +55,7 @@ export const CreateSentence = ({
   }, []);
 
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <Loader />;
   }
 
   const hanleReset = () => {
@@ -64,8 +67,12 @@ export const CreateSentence = ({
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.wrapper}>
+    <motion.div
+      {...animationConfig}
+      className={styles.container}>
+      <motion.div
+        {...animationConfig}
+        className={styles.wrapper}>
         <SentenceElementsList
           active={active}
           words={words}
@@ -80,7 +87,7 @@ export const CreateSentence = ({
           handleDragStart={handleDragStart}
           handleDragEnd={handleDragEnd}
         />
-      </div>
+      </motion.div>
 
       <DropBoxes
         words={words}
@@ -90,7 +97,7 @@ export const CreateSentence = ({
       />
 
       <div className={styles.buttonsWrapper}>
-        <soan>წინადადება {sentence + 1}</soan>
+        <span>წინადადება {sentence + 1}</span>
         <Sentence selectedWords={selectedWords} />
 
         <button
@@ -133,6 +140,6 @@ export const CreateSentence = ({
 
         <TakePhoto takeScreenshot={takeScreenshot} />
       </div>
-    </div>
+    </motion.div>
   );
 };
