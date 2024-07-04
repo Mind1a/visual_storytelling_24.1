@@ -62,25 +62,40 @@ export const getWords = (step, words, stepsLength, setActive) => {
 };
 
 // for generating random words
-export const generateWords = (array, word1, word2) => {
+export const generateWords = (array, predefinedWords = []) => {
   function shuffleArray(array) {
     return array.sort(() => 0.5 - Math.random());
   }
 
-  const filteredWord = array.filter(
-    item => item.word !== word1 && item.word !== word2,
+  // Extract words from predefinedWords
+  const predefinedWordSet = new Set(
+    predefinedWords.map(word => (typeof word === "string" ? word : word.word)),
   );
 
-  const selectedWords = array.filter(
-    item => item.word === word1 || item.word === word2,
+  // Find and store original objects from predefinedWords
+  const predefinedWordObjects = array.filter(item =>
+    predefinedWordSet.has(item.word),
   );
 
-  const shuffled = shuffleArray(filteredWord);
-  const randomItems = shuffled.slice(0, 5);
+  // Filter out predefined words from the array to avoid duplication
+  const filteredArray = array.filter(item => !predefinedWordSet.has(item.word));
 
-  const words = shuffleArray([...selectedWords, ...randomItems]);
+  // Shuffle the filtered array to randomize word selection
+  const shuffledFilteredArray = shuffleArray(filteredArray);
 
-  return words;
+  // Calculate how many random words are needed to fill up to 7 words
+  const numberOfRandomWordsNeeded = 7 - predefinedWordObjects.length;
+
+  // Select random words from the filtered and shuffled array
+  const randomWords = shuffledFilteredArray.slice(0, numberOfRandomWordsNeeded);
+
+  // Combine predefined words with selected random words
+  const combinedWords = [...predefinedWordObjects, ...randomWords];
+
+  // Shuffle the combined array to mix predefined and random words
+  const finalWords = shuffleArray(combinedWords);
+
+  return finalWords.slice(0, 7);
 };
 
 // for generating sentence data
@@ -91,9 +106,17 @@ export const createSentenceData = (
   adpositionsArgs,
 ) => {
   return {
-    nouns: generateWords(category, ...nounsArgs),
-    verbs: generateWords(verbs, ...verbsArgs),
+    nouns: generateWords(category, nounsArgs),
+    verbs: generateWords(verbs, verbsArgs),
     signs: signs,
-    adpositions: generateWords(adpositions, ...adpositionsArgs),
+    adpositions: generateWords(adpositions, adpositionsArgs),
   };
+};
+
+// for animation
+export const animationConfig = {
+  initial: { opacity: 0 },
+  whileInView: { opacity: 1 },
+  viewport: { once: true },
+  transition: { duration: 1 },
 };
