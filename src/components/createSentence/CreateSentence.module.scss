@@ -1,0 +1,100 @@
+@import "./../../styles/abstracts/variables";
+@import "./../../styles/abstracts/mixins";
+
+.container {
+  @include flex-center(column);
+  gap: 2.6rem;
+  width: 100%;
+
+  @supports not (gap: 2.6rem) {
+    & > *:not(:last-child) {
+      margin-bottom: 2.6rem;
+    }
+  }
+}
+
+.wrapper {
+  @include flex-center(row);
+  gap: 11px;
+
+  @supports not (gap: 11px) {
+    & > *:not(:last-child) {
+      margin-right: 11px;
+    }
+  }
+
+  @media (max-width: 1250px) {
+    @include flex-center(column);
+  }
+}
+
+.buttonsWrapper {
+  @include flex-center(row);
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-self: end;
+
+  @supports not (gap: 1rem) {
+    & > *:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.arrow {
+  align-self: flex-start;
+}
+
+.backArrow {
+  transform: rotate(180deg);
+}
+
+@mixin data-tooltip($bg-color) {
+  content: attr(data-tooltip);
+  position: absolute;
+  top: -30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: $bg-color;
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 5px;
+  white-space: nowrap;
+  z-index: 10;
+  font-size: 12px;
+}
+
+@mixin action-button($bg-color, $color, $active-color) {
+  @include basic-button($bg-color, $color);
+  padding: 0.7rem;
+  height: 3.125rem;
+  aspect-ratio: 1;
+  position: relative;
+
+  &:active {
+    background-color: $active-color;
+  }
+
+  &:hover::after {
+    @include data-tooltip($bg-color);
+  }
+
+  &:disabled {
+    cursor: default;
+    &:hover::after {
+      display: none;
+    }
+
+    &:active {
+      background-color: $btn-bg-disabled;
+    }
+  }
+}
+
+.resetButton {
+  @include action-button($btn-bg-accent, $clr-white, $btn-border-accent-hover);
+}
+
+.backButton {
+  @include action-button($btn-bg-tertiary, $clr-white, #5baea8);
+}

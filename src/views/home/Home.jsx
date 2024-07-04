@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
+import useScreenshot from "../../hooks/useScreenshot";
+import { animationConfig } from "../../utils";
 
 import { categories } from "../../data/categories";
 import { SentenceButton } from "../../components/buttons/sentenceButton";
@@ -12,6 +15,8 @@ const Home = () => {
   const [words, setWords] = useState(null);
   const [category, setCategory] = useState(null);
   const [start, setStart] = useState(false);
+  const [sentence, setSentence] = useState(0);
+  const [ref, takeScreenshot] = useScreenshot();
 
   const handleStart = () => {
     if (words && category) {
@@ -19,8 +24,22 @@ const Home = () => {
     }
   };
 
+  const handleNextSentence = () => {
+    if (sentence < 6) {
+      setSentence(prevStep => prevStep + 1);
+    } else {
+      setStart(false);
+      setSentence(0);
+      setCategory(null);
+      setWords(null);
+    }
+  };
+
   return (
-    <div className={styles.container}>
+    <motion.div
+      {...animationConfig}
+      className={styles.container}
+      ref={ref}>
       {!start ? (
         <>
           <div className={styles.buttonWrapper}>
@@ -41,8 +60,8 @@ const Home = () => {
               <CategoryCard
                 key={item.id}
                 item={item}
-                onClick={() => setCategory(item.name)}
-                selected={category === item.name}
+                onClick={() => setCategory(item)}
+                selected={category?.id === item.id}
               />
             ))}
           </div>
@@ -56,10 +75,13 @@ const Home = () => {
       ) : (
         <CreateSentence
           words={words}
-          category={category}
+          data={category.data[sentence]}
+          sentence={sentence}
+          handleNextSentence={handleNextSentence}
+          takeScreenshot={takeScreenshot}
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 

@@ -28,11 +28,15 @@
 
   &:hover {
     box-shadow: 0 4px 12px rgba(10, 10, 10, 0.4);
+    scale: 1.05;
   }
 }
 
 .card.active {
   @include active-state($card-active-border, $clr-white);
+  &:hover {
+    scale: 1;
+  }
 }
 
 .title {

@@ -1,0 +1,10 @@
+.image {
+  max-width: 100%;
+  object-fit: contain;
+  opacity: 0;
+  transition: opacity 0.3s ease-in;
+}
+
+.loaded {
+  opacity: 1;
+}

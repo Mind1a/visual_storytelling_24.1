@@ -1,3 +1,6 @@
+import { motion } from "framer-motion";
+import { animationConfig } from "../../utils";
+
 import styles from "./InfoPageContent.module.scss";
 import PatternNotebook from "./../../assets/patterns/patternNotebook.svg";
 import PatternPancil from "./../../assets/patterns/patternPencil.svg";
@@ -6,7 +9,9 @@ import PatternPolygon from "./../../assets/patterns/patternPolygon.svg";
 
 const InfoPageContent = ({ heading, text }) => {
   return (
-    <div className={styles.contentWrapper}>
+    <motion.div
+      {...animationConfig}
+      className={styles.contentWrapper}>
       <img
         src={PatternNotebook}
         alt="background pattern-notebook"
@@ -30,7 +35,7 @@ const InfoPageContent = ({ heading, text }) => {
 
       <h1>{heading}</h1>
       <p>{text}</p>
-    </div>
+    </motion.div>
   );
 };
 

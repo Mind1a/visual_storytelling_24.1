@@ -1,11 +1,11 @@
 import styles from "./BasicButton.module.scss";
 
-export const BasicButton = ({ children, onClick, disabled }) => {
+export const BasicButton = ({ children, onClick, disabled, secondary }) => {
   return (
     <button
       onClick={onClick}
       disabled={disabled}
-      className={styles.basicButton}>
+      className={`${secondary ? styles.secondary : styles.primary}`}>
       {children}
     </button>
   );

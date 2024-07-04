@@ -1,0 +1,61 @@
+@import "./../../styles/abstracts/variables";
+@import "./../../styles/abstracts/mixins";
+
+.wrapper {
+  @include flex-center(row);
+  flex-wrap: wrap;
+  gap: 2rem;
+  background-color: $bg-primary;
+  width: 100%;
+  padding: 2.3rem;
+
+  @supports not (gap: 2rem) {
+    & > *:not(:last-child) {
+      margin-right: 2rem;
+    }
+  }
+}
+
+.card {
+  @include flex-center(column);
+  width: 100%;
+}
+
+@mixin drop-box($border-color) {
+  @include flex-center(column);
+  height: 10.5rem;
+  padding: 1rem;
+  background-color: $clr-white;
+  border: 5px solid $border-color;
+  border-radius: 10px;
+
+  &.smallBox {
+    width: 9rem;
+  }
+
+  &.bigBox {
+    width: 10.5rem;
+  }
+}
+
+.nounBox {
+  @include drop-box($btn-bg-primary);
+}
+
+.signBox {
+  @include drop-box($btn-bg-secondary);
+}
+
+.adpositionBox {
+  @include drop-box($btn-bg-tertiary);
+}
+
+.verbBox {
+  @include drop-box($btn-bg-accent);
+}
+
+.highlighted {
+  border: 5px solid #0aa91a;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.27);
+  transition: all 0.3s ease-in-out;
+}

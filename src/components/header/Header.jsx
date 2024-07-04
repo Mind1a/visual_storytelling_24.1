@@ -1,19 +1,30 @@
-import { Link } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Navigation } from "../navigation";
 import styles from "./Header.module.scss";
 import Logo from "./../../assets/images/logo.png";
 
 const Header = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const reload = () => {
+    if (location.pathname === "/home") {
+      window.location.reload();
+    } else {
+      navigate("/home");
+    }
+  };
+
   return (
     <header className={styles.header}>
-      <Link
-        to={"/home"}
+      <div
+        onClick={reload}
         className={styles.logo}>
         <img
           src={Logo}
           alt="Logo"
         />
-      </Link>
+      </div>
       <Navigation />
     </header>
   );
