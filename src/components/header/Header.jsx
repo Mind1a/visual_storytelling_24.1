@@ -4,10 +4,15 @@ import styles from "./Header.module.scss";
 import Logo from "./../../assets/images/logo.png";
 
 const Header = () => {
+  const reload = () => {
+    window.location.reload();
+  };
+
   return (
     <header className={styles.header}>
       <Link
         to={"/home"}
+        onClick={reload}
         className={styles.logo}>
         <img
           src={Logo}
