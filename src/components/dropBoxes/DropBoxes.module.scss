@@ -24,6 +24,7 @@
 @mixin drop-box($border-color) {
   @include flex-center(column);
   height: 10.5rem;
+  padding: 1rem;
   background-color: $clr-white;
   border: 5px solid $border-color;
   border-radius: 10px;
