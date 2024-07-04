@@ -1,0 +1,15 @@
+@import "./../../styles/abstracts/variables";
+@import "./../../styles/abstracts/mixins";
+
+.container {
+  @include flex-center(row);
+  gap: 12px;
+  margin: 0.5rem 7rem 0.5rem 3rem;
+  cursor: pointer;
+
+  @supports not (gap: 12px) {
+    & > *:not(:last-child) {
+      margin-bottom: 12px;
+    }
+  }
+}
