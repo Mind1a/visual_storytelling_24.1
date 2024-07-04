@@ -5,7 +5,7 @@ export const LightBulbs = ({ isActive }) => {
     fill: isActive ? "#F2A413" : "#C9D4D3",
     stroke: isActive ? "#F2A413" : "#C9D4D3",
     strokeWidth: "0.8",
-    filter: isActive && "url(#dropShadow)",
+    filter: isActive ? "url(#dropShadow)" : "",
   };
   return (
     <svg
